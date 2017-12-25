@@ -1,0 +1,113 @@
+---
+title: "Assignment 7"
+author: "Abdullah Farouk"
+date: '2017-11-19'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Question 1
+
+```{r}
+#Vector of theta values
+theta <- seq(0, 1, by = 0.01)
+
+y_1 <- dbeta(theta, shape1 = 0.5, shape2 = 0.1)
+y_2 <- dbeta(theta, shape1 = 0.1, shape2 = 0.5)
+y_3 <- dbeta(theta, shape1 = 0.5, shape2 = 0.5)
+y_4 <- dbeta(theta, shape1 = 1, shape2 = 1)
+y_5 <- dbeta(theta, shape1 = 5, shape2 = 1)
+y_6 <- dbeta(theta, shape1 = 1, shape2 = 5)
+y_7 <- dbeta(theta, shape1 = 5, shape2 = 20)
+y_8 <- dbeta(theta, shape1 = 5, shape2 = 50)
+plot(y_1, type = 'l')
+plot(y_2, type = 'l')
+plot(y_3, type = 'l')
+plot(y_4, type = 'l')
+plot(y_5, type = 'l')
+plot(y_6, type = 'l')
+plot(y_7, type = 'l')
+plot(y_8, type = 'l')
+
+
+# Part b. I chose (50,10) and (10,100)
+y_50_10 = dbeta(theta, shape1 = 50, shape2 = 10)  
+y_10_100 = dbeta(theta, shape1 = 10, shape2 = 100)
+plot(y_50_10, lwd = 1)
+plot(y_10_100, lwd = 2)
+
+
+#Part c
+x <- seq(0,1, by = 0.01)
+qq<- curve(dbeta(x, 0.5, 0.1), xlab = 'X', main = 'Graph of Beta density funcitons')
+curve(dbeta(x, 0.1, 0.5), add = TRUE, col = 'green')
+
+#From the above we observe that they are the same
+
+```
+
+
+
+
+
+##Question 3
+
+To do this question, we first construct the posterior distribution of the mean parameter, which has a noncentral t distribution. We then obtain the 75% quantile from the central t distribution and use this to obtain the 75% quantile of the noncentral t distribution.
+
+```{r}
+
+n <-20    #Number of observations
+df <- 30   #Degrees of freedom 
+x2 <- c(1.1777518, -0.5867896,  0.2283789, -0.1735369, -0.2328192,
+     1.0955114,  1.2053680, -0.7216797, -0.3387580,   0.1620835,
+     1.4173256, 0.0240219, -0.6647623,  0.6214567,   0.7466441,
+     1.9525066, -1.2017093,  1.9736293,  -0.1168171,  0.4511754)
+
+a_2 <- (2-(sum(x2))^2/(n+1)+sum(x2^2))/((n+1)*df)
+B <- sum(x2)/(n+1)
+a <- sqrt(a_2)
+
+
+#function to obtain the 75% quantile from non standard t
+noncentral_t_quantile <- function(q, mean, sd, v) {
+  return(mean + sd*qt(q,df=v))
+} 
+qt <- noncentral_t_quantile(0.75,B,a,df)
+
+
+#Part b
+mean_posterior_mean <- B
+variance_posterior_mean <- a_2*df/(df-2)
+second_moment_posterior_mean <- B^2 + variance_posterior_mean
+
+#Print results
+qt
+mean_posterior_mean
+variance_posterior_mean
+second_moment_posterior_mean
+```
+
+
+## Question 4
+
+Over here I use functions and data, from part 3, to compute my answers.
+
+```{r}
+#Part a
+prior_mean <- seq(-2,2,0.01)
+post_mean <- (sum(x2)+prior_mean)/(n+1)
+plot(prior_mean, post_mean)
+
+#Part b
+d_zero = seq(0.5, 10, by = 0.01)
+avg_x <- mean(x2)
+y1 = (1 + 0.5*sum((x2 - avg_x)^2) + n * avg_x^2/(1 + n))/(d_zero + n/2 - 1)
+                                                         
+plot(y1 ~ d_zero, type = "l", xlab = "d0", ylab = "Posterior Mean of Variance Parameter")
+
+```
+
