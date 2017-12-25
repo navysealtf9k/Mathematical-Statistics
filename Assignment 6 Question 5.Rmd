@@ -1,0 +1,75 @@
+---
+title: "Assignment 6 question 5"
+author: "Abdullah Farouk"
+date: '2017-11-09'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Question 5 - Collaborated with Menglin Zhou to plot a cubic spline with lambda value of 2 for data in cps71. 
+```{r}
+
+library('np')
+data("cps71")
+x <- cps71$age
+y <- cps71$logwage
+knot <- unique(x)
+k=length(knot)
+
+fd <- function(knot,xi){
+  knot2=knot[1:k-1]
+  dd <- cbind(xi-knot2,rep(0,k-1))
+  m <- apply(dd,1,max)
+  d <- (m^3-(max(x-knot[k],0))^3)/(knot[k]-knot2)
+  return(d)
+}
+
+fd2 <- function(knot,x,j){
+  return((6*(pmax(x-knot[j],0))-6*(pmax(x-knot[k],0)))/(knot[k]-knot[j]))
+}
+
+fN <- function(xi,knot){
+  N=rep(0,k)
+  N[1]=1
+  N[2]=xi
+  d <- fd(knot,xi)
+  N[3:k] <-d[2:(k-1)]-rep(d[1],(k-2))
+  return(N)
+}
+
+fN2 <- function(x,knot,j){
+  if(j==1) return(0*x^0)
+  if(j==2) return(0*x)
+  if(j>2){
+    d2 <- fd2(knot,x)
+    return(fd2(knot,x,j-1)-fd2(knot,x,1))
+  }
+}
+
+n <- length(x)
+Z <- matrix(0,nrow=n, ncol=k)
+for (i in 1:n){
+  Z[i,] <- fN(x[i],knot)}
+
+intN = matrix(0,nrow=k,ncol=k)
+for (j in 1:k) {
+  for (l in 1:k) {
+    fun = function(x) {
+      return(fN2(x,knot,j)*fN2(x,knot,l))
+    }
+    val = integrate(fun, knot[1], knot[k])$value
+    intN[j,l]=val;
+  }
+}
+
+beta_hat = solve(t(Z)%*%Z+2*intN)%*%t(Z)%*%y
+y_hat = Z%*%beta_hat
+
+{plot(x,y,xlab="age",ylab="lowage",main="Cubic Spline with Lambda = 2")
+lines(x,y_hat,col='purple',lwd=2)}
+
+
+```
