@@ -9,7 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Question 2
+## Question 2
 
 Suppose we want to generate random numbers from standard normal distribution whose density is given by φ(x) = (2π)−1/2 exp(−x2/2).
 
@@ -41,7 +41,7 @@ qqnorm(accepted_samples)
 ```
 
 
-#Question 4
+## Question 4
 Recall that we had difficulties to “identify” the marginal posterior dis- tributions of μ, σ2 when their priors are independent, one is normal and the other is inverse Gamma. Gibbs sampler may be a way to avoid the need of identifying it.
 
 (a) Use the data given in the last assignment, and prior N(0,4) for μ, Gamma(d0 = 5) for λ = 1/σ2, write down the joint posterior density function of μ and σ2 up to a multiplication constant.
