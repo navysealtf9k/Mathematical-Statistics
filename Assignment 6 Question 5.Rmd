@@ -10,6 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Question 5 - Collaborated with Menglin Zhou to plot a cubic spline with lambda value of 2 for data in cps71. 
+
+Use the data cps71 from the package np in R to fit the following kernel regressions (refer to Section 8.3 in the Lecture Notes for details) withx= age andy= logwage.
+
+Fit a cubic spline to the data cps17 as in Question #1 and #2 with
+λ = 2.
+Plot the fitted natural spline over the range of x.
+
 ```{r}
 
 library('np')
