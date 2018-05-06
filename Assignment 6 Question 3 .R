@@ -1,3 +1,7 @@
+#Using the same data cps71 as in Question #1, obtain the bandwidth recommended by the leave-one-out cross-validation (CV) and general- ized cross-validation (GCV), as follow.
+#(a) For local constant kernel estimator of βx, find the bandwidth within the range of h ∈ (0.02, 5).
+#(b) For local linear kernel estimator of βx, find the bandwidth within the range of h ∈ (0.02, 5).
+
 library(np)
 library(ggplot2)
 
