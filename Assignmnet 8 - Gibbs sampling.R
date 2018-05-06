@@ -1,4 +1,9 @@
 # Question 4: Gibbs Sampling
+
+# Recall that we had difficulties to “identify” the marginal posterior dis- tributions of μ, σ2 when their priors are independent, one is normal and the other is inverse Gamma. Gibbs sampler may be a way to avoid the need of identifying it.
+
+# (a) Use the data given in the last assignment, and prior N(0,4) for μ, Gamma(d0 = 5) for λ = 1/σ2, write down the joint posterior density function of μ and σ2 up to a multiplication constant.
+
 # Load Package
 # install.packages('plot3D')
 # install.packages('MCMCpack')
@@ -6,7 +11,7 @@ library(MASS)      # Q4 kde2d
 library(plot3D)    # Q4 scatter3D
 library(MCMCpack)  # Q4 rinvgamma
 
-## Data and summary statistics
+# Data and summary statistics
 dat <- c(1.1777518, -0.5867896, 0.2283789, -0.1735369, -0.2328192,
          1.0955114, 1.2053680, -0.7216797, -0.3387580, 0.1620835,
          1.4173256, 0.0240219, -0.6647623, 0.6214567, 0.7466441,
@@ -16,7 +21,10 @@ n <- length(dat)
 x_tot <- sum(dat)
 x_sq_tot <- sum(dat^2)
 
-## b) Generate Data by Gibbs
+
+# (b) Write a code to generate data by Gibbs sampler method from the above posterior distribution. Generate N = 1000 of pairs. Obtain their means.
+
+# Generate Data by Gibbs
 N <- 1000
 mu <- rep(NA, N)
 sigma_sq <- rep(NA, N)
@@ -31,9 +39,10 @@ length(mu)
 (mu.bar <- mean(mu))
 (sigma.bar <- mean(sigma_sq))
 
-## c) Plot density function and density estimator
+# (c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
+# Plot density function and density estimator
 
-### Density function: Grid and df
+# Density function: Grid and df
 # Define pdf of the joint posterior distribution
 fpost <- function(x, y){
   f_post <- (y^(-16))*exp(-(x_sq_tot-2*x_tot*x+20*x^2+2)/(2*y)-x^2/8)
@@ -51,14 +60,14 @@ for (i in 1:length(mu.tmp)){
   z.tmp[i] <- fpost(mu.tmp[i], sigma.tmp[i])
 }
 
-### Density Estimator: Grid and df
+# Density Estimator: Grid and df
 df_est <- kde2d(mu, sigma_sq, n = N, lims = c(-1, 1, 0, 2))
 
 mu.grid <- rep(df_est$x, length(df_est$x))
 sigma.grid <- rep(df_est$y, each = length(df_est$y))
 z.vec <- as.vector(df_est$z)
 
-### Plot
+# Plot
 # Plot of the density function
 scatter3D(mu.tmp, sigma.tmp, z.tmp, xlim=c(-1, 1), ylim=c(0, 2), xlab = expression(mu), ylab = expression(sigma^2), main="Density function", colkey = list(width=0.5))
 
