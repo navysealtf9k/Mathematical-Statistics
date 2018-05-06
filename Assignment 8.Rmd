@@ -11,9 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Question 2
 
-Suppose we want to generate random numbers from standard normal distribution whose density is given by φ(x) = (2π)−1/2 exp(−x2/2).
-
-We decide to use rejective sampling plan via double exponential distri- bution whose density function is given by:
+Suppose we want to generate random numbers from standard normal distribution whose density is given by φ(x) = (2π)−1/2 exp(−x2/2). We decide to use rejective sampling plan via double exponential distri- bution whose density function is given by:
 f0(x) = 1 exp(−|x|). 2
 
 (a) Compute the constant u as defined in our notes.
@@ -45,10 +43,6 @@ qqnorm(accepted_samples)
 Recall that we had difficulties to “identify” the marginal posterior dis- tributions of μ, σ2 when their priors are independent, one is normal and the other is inverse Gamma. Gibbs sampler may be a way to avoid the need of identifying it.
 
 (a) Use the data given in the last assignment, and prior N(0,4) for μ, Gamma(d0 = 5) for λ = 1/σ2, write down the joint posterior density function of μ and σ2 up to a multiplication constant.
-
-(b) Write a code to generate data by Gibbs sampler method from the above posterior distribution. Generate N = 1000 of pairs. Obtain their means.
-
-(c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
 
 ```{r}
 #Question 4a
