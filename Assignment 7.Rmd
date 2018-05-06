@@ -12,6 +12,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Question 1
 
+(a) Using R-package to plot 6 beta density functions with degrees of freedoms:
+
+(a, b) = (0.5, 0.1), (0.1, 0.5), (0.5, 0.5), (1, 1), (5, 1), (1, 5), (5, 20), (5, 50). 
+
+(b) Select two additional pairs based on your own curiosity and plot
+them.
+
+(c) Show that the density functions with parameters (a, b) and (b, a) are mirror images of each other.
+
 ```{r}
 #Vector of theta values
 theta <- seq(0, 1, by = 0.01)
@@ -54,7 +63,14 @@ curve(dbeta(x, 0.1, 0.5), add = TRUE, col = 'green')
 
 
 
-##Question 3
+## Question 3
+
+Given a set of i.i.d. observations of size n from N(μ,σ2) and the prior distribution specified as in the previous problem with μ0 = 0.
+
+(a) Find the posterior 75% quantile of the mean parameter μ; 
+
+(b) Find the posterior expectation of μ2.
+
 
 To do this question, we first construct the posterior distribution of the mean parameter, which has a noncentral t distribution. We then obtain the 75% quantile from the central t distribution and use this to obtain the 75% quantile of the noncentral t distribution.
 
@@ -93,6 +109,20 @@ second_moment_posterior_mean
 
 
 ## Question 4
+
+Following the last problem. Assume the data set contains n = 20 observations as follows:
+
+   (1.1777518, -0.5867896,  0.2283789, -0.1735369, -0.2328192,
+   1.0955114,  1.2053680, -0.7216797, -0.3387580,   0.1620835,
+   1.4173256,  0.0240219, -0.6647623,  0.6214567,   0.7466441,
+   1.9525066, -1.2017093,  1.9736293,  -0.1168171,  0.4511754)
+   
+(a) Given d0 = 5, plot the posterior mean of μ as a function of μ0 over [−2, 2].
+
+(b) Given μ0 = 0, plot the posterior mean of σ2 as a function of d0 over [0.5, 10].
+
+Remark: use Monte Carlo simulation if direct numerical/analytical computation is too difficult/infeasible.
+
 
 Over here I use functions and data, from part 3, to compute my answers.
 
