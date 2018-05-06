@@ -23,6 +23,12 @@ data("cps71")
 
 #Question 2
 
+(a) Use the data cps71 from the package np in R to fit the following kernel regressions (refer to Section 8.3 in the Lecture Notes for details) withx= age andy= logwage.
+For x = 25, 35, 50,
+(i) obtain the local constant kernel estimator of βx, i.e., p = 0. (ii) obtain the local linear kernel estimator of βx, i.e., p = 1.
+(iii) obtain the local quadratic kernel estimator of βx, i.e., p = 2. Report these vectors. What are your predicted values at these x?
+Remark: Use the density function of the standard Normal distribution N(0,1) as the kernel and let bandwidth h = n−1/5, where n the number of observations.
+
 Here I specify my initial conditions
 ```{r}
 age <- cps71$age   #Values of x
@@ -116,6 +122,7 @@ fitted_values
  
 ```
 
+(b) Plot the data, along with the three fitted regression functions gˆ(x) in part (a). Use grid of length 0.5 over the range x, do not include the boundaries.
 
 Over here I compute and plot the fitted values for all ages for all three estimators.
 
@@ -179,6 +186,11 @@ bg = "white")}
 
 
 #Question 3
+
+Using the same data cps71 as in Question #1, obtain the bandwidth recommended by the leave-one-out cross-validation (CV) and general- ized cross-validation (GCV), as follow.
+
+(a) For local constant kernel estimator of βx, find the bandwidth within the range of h ∈ (0.02, 5).
+(b) For local linear kernel estimator of βx, find the bandwidth within the range of h ∈ (0.02, 5).
 
 ```{r}
 #initialize matrices
@@ -245,6 +257,14 @@ hh
 
 
 #Question 4 - Please refer to my written solutions for more details
+
+Give the expression of the natural cubic spline s(x) with the following knots and values
+t1 =1, s(t1)=5
+t2 =2, s(t2)=17
+t3 = 5, s(t3) = 156.5.
+Plot the natural cubic spline in the domain x ∈ [1, 5].
+
+
 ```{r}
 #Solving for coefficients. Collaborated with Eric Sanders to solve this.
 gg <- c(5,5,17,17,156.5,156.5, 0,0,0,0,0,0)
