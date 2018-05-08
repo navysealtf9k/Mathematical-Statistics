@@ -62,6 +62,7 @@ sum_x_2 # found to be 17.94659
 
 
 #Question 4b
+Write a code to generate data by Gibbs sampler method from the above posterior distribution. Generate N = 1000 of pairs. Obtain their means.
 
 #Gibbs sampling.
 #install.packages('invgamma')
