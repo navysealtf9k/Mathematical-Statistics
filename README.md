@@ -7,7 +7,8 @@ This repo contains my codes on a variety of theoretical topics in Statistics. Yo
 
 Folder Name | Description | Link
 :------------ | :------------------------ | :----------------------------------:
-Bayesian_Statistics| This folder contains my code on computing Bayesian posterior distributions. | [Click here](https://github.com/STAT540-UBC/zz_farouk-abdullah_STAT540_2018/tree/master/Assignments)
-Sampling_Techniques| This folder contains my code highlighting my use of Markov chain Monte Carlo and Gibbs sampling techniques to sample from simulated data. | [Click here](https://github.com/STAT540-UBC/zz_farouk-abdullah_STAT540_2018/blob/master/Paper%20Review/Paper_Review.md)
-Nonparametric_Regression | This folder contains my code on my use of the cubic spline method. | [Click here](https://github.com/STAT540-UBC/zz_farouk-abdullah_STAT540_2018/tree/master/Seminars)
+Nonparametric_Regression| This folder contains my code on my use of the cubic spline method. | [Click here](https://github.com/navysealtf9k/Mathematical-Statistics/tree/master/Nonparametric_Regression)
+Bayesian_Statistics| This folder contains my code on computing Bayesian posterior distributions. | [Click here](https://github.com/navysealtf9k/Mathematical-Statistics/tree/master/Bayesian_Statistics)
+Sampling_Techniques| This folder contains my code highlighting my use of Markov chain Monte Carlo and Gibbs sampling techniques to sample from simulated data. | [Click here](https://github.com/navysealtf9k/Mathematical-Statistics/tree/master/Sampling_Techniques)
+
 
