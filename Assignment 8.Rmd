@@ -89,18 +89,54 @@ mean(u)
 mean(variance) 
 
 #4c
-(c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
+#(c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
+#u_2 <- seq(0.01,1,0.01)
+#variance_2 <- seq(0.01,1,0.01)
+#joint_density <- matrix(NA, nrow = length(u_2), ncol = length(u_2))
+#for (i in 1:length(u_2)){
+#  for (j in 1:length(u_2)){
+#    joint_density[i,j] <- variance_2[i]^(-(obs/2 + 5)- 1) * exp(-1/(2*variance_2[i])*(sum(x^2) - 
+#                        2*u_2[j]*sum(x) + obs*(u_2[j]^2)) - (u_2[j]^2)/8 - 1/variance_2[i]) 
+#  }
+#}
+#persp(u_2, variance_2, joint_density, phi = 45, theta = 45)
 
-u_2 <- seq(0.01,1,0.01)
-variance_2 <- seq(0.01,1,0.01)
-joint_density <- matrix(NA, nrow = length(u_2), ncol = length(u_2))
-for (i in 1:length(u_2)){
-  for (j in 1:length(u_2)){
-    joint_density[i,j] <- variance_2[i]^(-(obs/2 + 5)- 1) * exp(-1/(2*variance_2[i])*(sum(x^2) - 
-                        2*u_2[j]*sum(x) + obs*(u_2[j]^2)) - (u_2[j]^2)/8 - 1/variance_2[i]) 
-  }
+# 4(c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
+
+# Plot density function and density estimator
+# Density function: Grid and df
+
+# Define pdf of the joint posterior distribution
+fpost <- function(x, y){
+  f_post <- (y^(-16))*exp(-(x_sq_tot-2*x_tot*x+20*x^2+2)/(2*y)-x^2/8)
+  return(f_post)
 }
-persp(u_2, variance_2, joint_density, phi = 45, theta = 45)
+
+# Create a grid
+mu.tmp <- rep(seq(-1, 1, 0.01), each=201)
+sigma.tmp <- rep(seq(0.01, 2.01, 0.01), 201)
+
+# Calculate the corresponding value of pdf
+z.tmp <- rep(NA, length(mu.tmp))
+
+for (i in 1:length(mu.tmp)){
+  z.tmp[i] <- fpost(mu.tmp[i], sigma.tmp[i])
+}
+
+# Density Estimator: Grid and df
+df_est <- kde2d(mu, sigma_sq, n = N, lims = c(-1, 1, 0, 2))
+
+mu.grid <- rep(df_est$x, length(df_est$x))
+sigma.grid <- rep(df_est$y, each = length(df_est$y))
+z.vec <- as.vector(df_est$z)
+
+# Plot
+# Plot of the density function
+scatter3D(mu.tmp, sigma.tmp, z.tmp, xlim=c(-1, 1), ylim=c(0, 2), xlab = expression(mu), ylab = expression(sigma^2), main="Density function", colkey = list(width=0.5))
+
+# Plot of the density estimator
+scatter3D(mu.grid, sigma.grid, z.vec, xlim=c(-1, 1), ylim=c(0, 2), xlab = expression(mu), ylab = expression(sigma^2), main="Density estimator", colkey = list(width=0.45))
+
 
 ```
 
