@@ -89,6 +89,8 @@ mean(u)
 mean(variance) 
 
 #4c
+(c) Plot the density function in (a) and a density estimator based on posterior sample obtained in (b).
+
 u_2 <- seq(0.01,1,0.01)
 variance_2 <- seq(0.01,1,0.01)
 joint_density <- matrix(NA, nrow = length(u_2), ncol = length(u_2))
