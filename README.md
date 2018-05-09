@@ -1,5 +1,5 @@
 ### REPO Contents
-This repo contains my codes on a variety of theoretical topics in Statistics, from nonparametric regression to Bayesian posterior distributions and sampling techniques, that are very useful in today's world. You can learn more about the work I have done in this course by referring to the table below. It provides a brief description of the contents of each folder in this repository 
+This repo contains my codes on a variety of theoretical topics in Statistics, from nonparametric regression to Bayesian posterior distributions and sampling techniques, that are very useful in today's world. You can learn more about the work I have done in this course by referring to the table below. 
 
 
 Folder Name | Description | Link
